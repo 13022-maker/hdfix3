@@ -18,7 +18,7 @@ input,select,textarea{font:inherit}
 .station b{font-family:var(--mono);font-size:20px;letter-spacing:1px;background:#fff;color:#0f3d3a;padding:0 8px;border-radius:6px}
 .tbtn{background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.25);border-radius:8px;padding:5px 11px;font-size:13.5px}
 .tbtn:hover{background:rgba(255,255,255,.25)}
-.wrap{display:grid;grid-template-columns:250px 1fr;min-height:calc(100vh - 62px)}
+.wrap{display:grid;grid-template-columns:250px minmax(0,1fr);min-height:calc(100vh - 62px)}
 .side{border-right:1px solid var(--line);background:#fff;padding:12px 10px;overflow:auto}
 .prog{margin:2px 6px 12px;font-size:13px;color:var(--mut)}
 .bar{height:6px;background:var(--line);border-radius:4px;margin-top:5px;overflow:hidden}
@@ -32,7 +32,7 @@ input,select,textarea{font:inherit}
 .nav .done .n{background:var(--ok);color:#fff}
 .nav .t{flex:1;font-size:14px}
 .nav .os{font-size:10.5px;opacity:.7}
-.main{padding:22px 28px 60px;max-width:1040px;width:100%}
+.main{padding:22px 28px 60px;max-width:1040px;width:100%;min-width:0}
 .head{display:flex;align-items:center;gap:12px;margin-bottom:12px}
 .head .big{width:42px;height:42px;border-radius:12px;background:var(--acc);color:#fff;display:grid;place-items:center;font-size:20px;font-weight:700;flex:none}
 .head h2{margin:0;font-size:22px}
@@ -42,7 +42,7 @@ input,select,textarea{font:inherit}
 .req{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin-bottom:16px}
 .lbl{font-size:12px;font-weight:700;color:var(--mut);letter-spacing:.5px;margin-bottom:2px}
 .req p{margin:0 0 10px}
-.specv{font-size:16px;font-weight:700;color:#0f3d3a;background:#e9f6f3;border-left:4px solid var(--acc);padding:7px 12px;border-radius:6px}
+.specv{overflow-wrap:anywhere;font-size:16px;font-weight:700;color:#0f3d3a;background:#e9f6f3;border-left:4px solid var(--acc);padding:7px 12px;border-radius:6px}
 .specv code{font-size:15px}
 .tabs{display:flex;gap:6px;margin-bottom:-1px}
 .tabs button{border:1px solid var(--line);border-bottom:0;background:#eef2f1;padding:8px 18px;border-radius:10px 10px 0 0;color:var(--mut);font-weight:500}
@@ -53,9 +53,9 @@ ol.steps>li{counter-increment:s;position:relative;padding:0 0 12px 38px}
 ol.steps>li::before{content:counter(s);position:absolute;left:0;top:1px;width:26px;height:26px;border-radius:50%;background:var(--acc2);color:var(--acc);font-weight:700;font-size:13px;display:grid;place-items:center}
 .sub{font-size:13.5px;font-weight:700;color:var(--acc);margin:14px 0 8px;padding-bottom:4px;border-bottom:1px dashed var(--line)}
 .sub:first-child{margin-top:0}
-code,.k{font-family:var(--mono);font-size:13.5px;background:#eef3f2;padding:1px 5px;border-radius:4px;word-break:break-all}
+code,.k{font-family:var(--mono);font-size:13.5px;background:#eef3f2;padding:1px 5px;border-radius:4px;overflow-wrap:anywhere}
 .k{background:#fff;border:1px solid #c9d4d2;border-bottom-width:2px;font-family:inherit;font-size:12.5px}
-pre.cmd{background:#122;color:#d7f5ee;font-family:var(--mono);font-size:13px;padding:10px 12px;border-radius:8px;overflow:auto;margin:6px 0;white-space:pre-wrap}
+pre.cmd{background:#122;color:#d7f5ee;font-family:var(--mono);font-size:13px;padding:10px 12px;border-radius:8px;overflow-x:auto;margin:6px 0;white-space:pre}
 .tip{background:var(--warnbg);border:1px solid #f0d78c;border-radius:10px;padding:10px 14px;margin-top:10px;font-size:14px}
 .tip b{color:var(--warn)}
 .tip ul{margin:4px 0 0;padding-left:20px}
@@ -125,7 +125,59 @@ textarea.code{width:100%;height:170px;font-family:var(--mono);font-size:13px;bor
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:6px 18px;margin:12px 0}
 .grid2 label{font-size:13px;color:var(--mut);display:flex;flex-direction:column}
 .grid2 input,.grid2 select{padding:5px 8px;border:1px solid #bbb;border-radius:6px;color:var(--ink);font-size:14px}
-@media(max-width:800px){.wrap{grid-template-columns:1fr}.side{border-right:0;border-bottom:1px solid var(--line)}.nav{display:flex;overflow:auto;gap:4px}.nav li button{flex-direction:column;gap:2px;width:auto;min-width:70px}.nav .t{font-size:11.5px;text-align:center}.nav .os{display:none}.main{padding:16px 12px 50px}.grid2{grid-template-columns:1fr}.row label.w{width:auto}}
+@media(max-width:800px){.wrap{grid-template-columns:minmax(0,1fr)}.side{border-right:0;border-bottom:1px solid var(--line)}.nav{display:flex;overflow:auto;gap:4px}.nav li button{flex-direction:column;gap:2px;width:auto;min-width:70px}.nav .t{font-size:11.5px;text-align:center}.nav .os{display:none}.main{padding:16px 12px 50px}.grid2{grid-template-columns:1fr}.row label.w{width:auto}}
+
+/* 工作排程器 */
+.ts{position:relative;font-family:'Segoe UI','Microsoft JhengHei','Noto Sans TC',sans-serif;font-size:13px;background:#fff;border:1px solid #8a8a8a;box-shadow:0 4px 16px rgba(0,0,0,.12);margin-bottom:10px}
+.ts .tbar{padding:6px 10px;border-bottom:1px solid #e3e3e3;display:flex}
+.ts .menu{padding:2px 6px;border-bottom:1px solid #e3e3e3;font-size:12.5px}.ts .menu span{padding:0 8px}
+.ts .tsb{display:grid;grid-template-columns:170px 1fr 180px;min-height:300px}
+.ts .tree{border-right:1px solid #ddd;padding:6px 4px;font-size:12.5px}.ts .tree div{padding:2px 4px;white-space:nowrap}.ts .tree .sel{background:#cce8ff}
+.ts .center{min-width:0;display:flex;flex-direction:column}.ts .tlw{overflow:auto;max-height:220px}
+.ts table.tl{border-collapse:collapse;width:100%;font-size:12px;white-space:nowrap}
+.ts table.tl th{background:#fff;border-right:1px solid #e5e5e5;border-bottom:1px solid #e5e5e5;text-align:left;font-weight:400;padding:3px 6px;color:#333;position:sticky;top:0}
+.ts table.tl td{padding:3px 6px;border-bottom:1px solid #f3f3f3}.ts table.tl tr{cursor:default}.ts table.tl tr.sel td{background:#cce8ff}
+.ts .detb{border-top:1px solid #ddd;padding:8px 10px;font-size:12.5px;background:#fafafa;line-height:1.8}
+.ts .acts{border-left:1px solid #ddd;background:#fff;font-size:12.5px}
+.ts .acts h4{margin:0;padding:4px 8px;font-size:12.5px;font-weight:400;border-bottom:1px solid #ddd}
+.ts .acts .ah{background:#dfe9f5;padding:3px 8px;font-weight:700}
+.ts .acts div[data-a]{padding:3px 10px 3px 14px;cursor:pointer;color:#0b3d91}.ts .acts div[data-a]:hover{background:#e5f1fb}
+.ts .taskbar{background:#1f2430;color:#fff;text-align:right;padding:3px 12px;font-size:11.5px;line-height:1.35;min-height:34px}
+.mcover{position:absolute;inset:0;background:rgba(255,255,255,.35);z-index:9}
+.wz{position:absolute;left:50%;top:26px;transform:translateX(-50%);width:min(640px,96%);background:#fff;border:1px solid #2b79d8;box-shadow:0 10px 36px rgba(0,0,0,.35);z-index:10}
+.wz .wt{padding:6px 10px;display:flex;font-size:12.5px}
+.wz .wh{padding:6px 14px 12px;font-size:17px;display:flex;gap:10px;align-items:center;border-bottom:1px solid #e3e3e3}
+.wz .wb{display:grid;grid-template-columns:150px 1fr;min-height:250px;background:#f0f0f0}
+.wz .ws{padding:12px 0 12px 10px;font-size:12.5px}.wz .ws div{padding:3px 8px;color:#333}.wz .ws .cur{font-weight:700;background:#fff}
+.wz .wc{padding:14px 16px;background:#fff}
+.wz .wf{display:flex;justify-content:flex-end;gap:6px;padding:10px;border-top:1px solid #ddd;background:#f0f0f0}
+.wz label.w2{width:150px;flex:none}.wz input[type=text],.wz textarea{border:1px solid #7a7a7a;padding:3px 5px;border-radius:0;font-size:13px}
+.wz .btn:disabled{opacity:.45}
+.sumt td{padding:2px 8px 2px 0;vertical-align:top}.sumt td:first-child{white-space:nowrap;width:80px}
+.brl{background:#fff;border:1px solid #aaa;margin:4px 0;max-width:340px}.brl div{padding:2px 8px;cursor:pointer}.brl div[data-pk]:hover{background:#cce8ff}
+.msgbox{position:absolute;left:50%;top:70px;transform:translateX(-50%);background:#fff;border:1px solid #2b79d8;box-shadow:0 8px 28px rgba(0,0,0,.35);z-index:12;width:min(400px,92%)}
+.msgbox .mt{padding:6px 10px;font-size:12.5px}.msgbox .mc{padding:10px 18px 16px;font-size:13.5px;word-break:break-all}.msgbox .mf{background:#f0f0f0;padding:10px;display:flex;justify-content:flex-end;gap:6px}
+.dtree{background:#fff;border:1px solid #ccc;padding:6px;font-size:13.5px;min-height:70px}.dtree .di{cursor:pointer;padding:1px 4px}.dtree .di.sel{background:#cce8ff}
+/* 考場下載網站 */
+.brwwrap{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:70;display:flex;padding:14px}
+.brw{position:relative;margin:auto;width:100%;max-width:1000px;height:100%;max-height:760px;background:#fff;border-radius:10px;overflow:hidden;display:flex;flex-direction:column}
+.brw .bt{background:#dee1e6;display:flex;align-items:flex-end;gap:8px;padding:8px 10px 0}
+.brw .tabt{background:#fff;padding:6px 14px;border-radius:8px 8px 0 0;font-size:12.5px;max-width:60%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.brw .bx{margin-left:auto;margin-bottom:6px;border:0;background:#c62828;color:#fff;border-radius:6px;padding:3px 10px;font-size:12.5px}
+.brw .addr{display:flex;gap:12px;align-items:center;padding:6px 12px;border-bottom:1px solid #ddd;font-size:14px;color:#555}
+.brw .url{flex:1;background:#f1f3f4;border-radius:14px;padding:4px 12px;color:#222;font-family:var(--mono);font-size:13px}
+.brw .pg{flex:1;overflow:auto;background:#FFFFCC;font-family:'標楷體','DFKai-SB','BiauKai','Kaiti TC',serif;color:#000;padding:10px 10px 30px}
+.brw .h1{font-size:30px;color:#000080;margin:12px 0;text-align:center}
+.brw table.st{border-collapse:collapse;width:59%;min-width:min(600px,100%);margin:0 auto}
+.brw td.sc{border:1px solid #111;padding:8px 6px;height:52px}
+.brw b.th{color:#003366;font-size:30px}.brw td.lab b{color:#D4143C;font-size:24px}.brw mark{background:yellow;color:inherit}
+.brw td.sc a{color:#000066;font-size:18px}.brw td.note1{font-size:22px;color:#003366}.brw .foot{text-align:center;color:#666;font-size:14px}
+.brw .acover{position:absolute;inset:0;background:rgba(0,0,0,.25)}
+.brw .alertbox{position:absolute;top:90px;left:50%;transform:translateX(-50%);background:#fff;border-radius:10px;box-shadow:0 6px 24px rgba(0,0,0,.35);padding:18px 22px;width:min(460px,92%);font-size:15px}
+.brw .dlb{position:absolute;right:14px;top:96px;background:#fff;border:1px solid #ccc;border-radius:10px;padding:10px 14px;box-shadow:0 4px 16px rgba(0,0,0,.2);font-size:13px}
+@media(max-width:800px){.ts .tsb{grid-template-columns:1fr}.ts .tree{display:none}.ts .acts{border-left:0;border-top:1px solid #ddd}
+.wz{top:6px}.wz .wb{grid-template-columns:1fr}.wz .ws{display:none}.wz label.w2{width:auto}
+.brw .h1{font-size:20px}.brw b.th{font-size:20px}.brw td.lab b{font-size:16px}.brw td.sc a{font-size:14px}.brw td.note1{font-size:15px}.brw table.st{width:100%}}
 </style>
 </head>
 <body>
@@ -133,6 +185,7 @@ textarea.code{width:100%;height:170px;font-family:var(--mono);font-size:13px;bor
   <h1>電腦硬體裝修丙級・監評人員現場指定內容表 練習平台<small>操作步驟＋模擬練習｜指定值可由老師自行修改</small></h1>
   <div class="station">工作崗位號碼 XX = <b id="xx">05</b>
     <button class="tbtn" id="newxx">🎲 換號碼</button></div>
+  <button class="tbtn" id="site">🌐 考場下載網站</button>
   <button class="tbtn" id="editspec">⚙ 修改指定值</button>
   <button class="tbtn" id="resetall">↺ 清除進度</button>
 </div>
@@ -157,7 +210,7 @@ textarea.code{width:100%;height:170px;font-family:var(--mono);font-size:13px;bor
 
 <script>
 const DEF={sysGB:80,dataGB:30,vmRAM:2,winName:'cXX',linName:'vXX',winIP:'static',linIP:'dhcp',ipPrefix:'192.168.240.1',
-backupMin:1,backupFile:'hosts',u1:'u01',p1:'p123456',u2:'u02',p2:'go8868@TW',printerMfr:'Generic',printerModel:'MS Publisher Color Printer',
+backupMin:1,backupFile:'hosts',backupDest:'D:\\XX',u1:'u01',p1:'p123456',u2:'u02',p2:'go8868@TW',printerMfr:'Generic',printerModel:'MS Publisher Color Printer',
 saverMin:3,ime:'微軟倉頡',font:'漢鼎繁勘亭',office:['word'],ftpIP:'192.168.240.200',ftpPwd:'go8868@TW',
 transfer:'C:\\windows\\win.ini',zip:'C:\\windows\\twain_32.dll',color:'red'};
 const store={get(k){try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
@@ -177,8 +230,8 @@ const OFFICE={word:'文書軟體（Word）',excel:'電子試算表（Excel）',p
 const COLOR={red:'紅',green:'綠',blue:'藍'};
 const HOSTS='C:\\Windows\\System32\\drivers\\etc\\hosts';
 const backupPath=()=>S.backupFile.toLowerCase()==='hosts'?HOSTS:S.backupFile;
-let FTP,DESK;
-function resetShared(){FTP={pwd:'passwd'+XX,changed:false,uploads:[]};DESK=[]}
+let FTP,DESK,DL,INST,CLIP;const REFRESH=new Set();
+function resetShared(){FTP={pwd:'passwd'+XX,changed:false,uploads:[]};DESK=[];DL=[];INST=new Set();CLIP=null}
 resetShared();
 
 const ITEMS=[
@@ -191,7 +244,7 @@ const ITEMS=[
 {id:4,t:'TCP/IP 設定',os:'both',d:'TCP/IP 設定。固定式之 TCP/IP 位址範圍為 192.168.240.1XX，XX 表示應檢人工作崗位號碼。',
  spec:()=>`Windows：${S.winIP==='static'?'固定式 <code>'+ipv()+'</code>':'動態式（DHCP）'}　Linux：${S.linIP==='static'?'固定式 <code>'+ipv()+'</code>':'動態式（DHCP）'}`},
 {id:5,t:'自動排程備份',os:'win',d:'在兩種不同之作業系統之一，設定自動排程備份功能，指定檔案為 hosts。',
- spec:()=>`Windows：<b>${S.backupMin}</b> 分鐘後啟動，備份 <code>${esc(S.backupFile)}</code>`},
+ spec:()=>`Windows：<b>${S.backupMin}</b> 分鐘後啟動，備份 <code>${esc(S.backupFile)}</code> → <code>${esc(sub(S.backupDest))}</code>`},
 {id:6,t:'新增使用者',os:'lx',d:'在兩種不同之作業系統之一，新增兩個使用者及設定密碼，每一使用者有不同桌面或背景，密碼 6 個字元以上。',
  spec:()=>`Linux：<code>${esc(S.u1)}</code> / <code>${esc(S.p1)}</code>　<code>${esc(S.u2)}</code> / <code>${esc(S.p2)}</code>`},
 {id:7,t:'印表機',os:'win',d:'在兩種不同之作業系統之一，設定印表機廠牌型號。',
@@ -280,21 +333,27 @@ return `<div class="sub">Windows：${S.winIP==='static'?'固定式':'動態式'}
 <div class="tip"><b>評分重點／常見失分</b><ul>
 <li>固定 IP 是 <code>${S.ipPrefix}</code> 後面接 XX：崗位 ${XX} → <code>${ipv()}</code>。</li>
 <li>遮罩打錯或兩台設成同一 IP，會連不到 FTP（第 12、13 項也跟著失分）。</li></ul></div>`},
-5:()=>{const src=backupPath();return `
+5:()=>{const src=backupPath(),d=sub(S.backupDest);return `
+<div class="sub">準備：先建備份資料夾</div>
+<ol class="steps"><li>開檔案總管 → 資料磁區 D: → 新增資料夾 <code>${esc(baseOf(d))}</code>（崗位號碼），路徑為 <code>${esc(d)}</code>。</li>
+<li>（建議）先在 cmd 測試指令能不能成功：<pre class="cmd">copy ${src} ${esc(d)} /y
+        1 個檔案已複製。</pre></li></ol>
+<div class="sub">建立基本工作精靈</div>
 <ol class="steps">
-<li>先在資料磁區建立備份資料夾，例如 <code>D:\\backup</code>。</li>
-<li><span class="k">Win</span>+<span class="k">R</span> → <code>taskschd.msc</code> 開啟「工作排程器」→ 右側「<b>建立基本工作</b>」。</li>
-<li>名稱：<code>backup</code> → 觸發程序選「<b>一次</b>」。</li>
-<li>開始時間 = <b>目前時間 + ${S.backupMin} 分鐘</b>（看工作列右下角時鐘；秒數若已過 50 秒，等跨到下一分再算）。</li>
-<li>動作：「啟動程式」→ 程式或指令碼 <code>cmd.exe</code>，新增引數：
-<pre class="cmd">/c copy /y ${src} D:\\backup\\</pre></li>
-<li>完成 → 等時間到，打開 <code>D:\\backup</code> 確認 hosts 出現；工作排程器程式庫中「上次執行結果」應為 (0x0)。</li></ol>
-<div class="sub">指令替代（cmd 以系統管理員執行）</div>
-<pre class="cmd">schtasks /create /tn backup /sc once /st HH:MM /tr "cmd /c copy /y ${src} D:\\backup\\"</pre>
+<li><span class="k">Win</span>+<span class="k">R</span> → <code>taskschd.msc</code> → 左邊點「工作排程器程式庫」→ 右邊「動作」窗格點「<b>建立基本工作...</b>」。</li>
+<li>【建立基本工作】名稱(A)：<code>backup</code> →「下一步」。</li>
+<li>【觸發程序】選「<b>一次(O)</b>」→「下一步」。</li>
+<li>【一次】「開始(S)」日期維持今天；時間欄位預設是<b>現在時間（含秒）</b>，把分鐘 <b>+${S.backupMin}</b>、秒改 00 →「下一步」。<br><span class="note">例：現在 下午 03:26:30 → 改成 下午 03:27:00。秒數已過 50 秒就改 +2 分，免得按完「完成」時間已經過了。</span></li>
+<li>【動作】選「<b>啟動程式(T)</b>」→「下一步」。</li>
+<li>【啟動程式】<br>程式或指令碼(P)：<code>cmd</code><br>新增引數 (選擇性)(A)：<pre class="cmd">/c copy ${src} ${esc(d)} /y</pre>→「下一步」。</li>
+<li>【摘要】核對「觸發程序」時間和「動作」內容 →「完成」。</li>
+<li>時間到後在程式庫按 <span class="k">F5</span> 重新整理：「上次執行結果」要是 <b>作業已順利完成。(0x0)</b>，並打開 <code>${esc(d)}</code> 確認有 <code>hosts</code>。</li></ol>
 <div class="tip"><b>評分重點／常見失分</b><ul>
-<li>hosts 的完整路徑：<code>${HOSTS}</code>（沒有副檔名）。</li>
-<li><code>copy</code> 是 cmd 內建指令，不能直接當「程式」，要用 <code>cmd.exe</code> + 引數 <code>/c copy …</code>。</li>
-<li>目的資料夾不存在 → 執行結果非 0x0、沒有備份檔。</li></ul></div>`},
+<li>路徑是 <b>drivers</b>（有 s）：<code>System32\\drivers\\etc\\hosts</code>。打成 driver → 執行結果 <b>(0x1)</b>。</li>
+<li>把整串 <code>copy …</code> 填進「程式或指令碼」：會跳出「似乎在程式中包含引數」，按「是」後程式變成 copy，執行結果 <b>(0x80070002)</b>。copy 是 cmd 內建指令，一定要 <code>cmd</code> ＋ <code>/c</code>。</li>
+<li>沒先建 <code>${esc(d)}</code> 資料夾：copy 不會報錯，而是在 D:\\ 產生一個<b>名為「${esc(baseOf(d))}」的檔案</b>，監評打開找不到 hosts。</li>
+<li>開始時間已經過去 →「下次執行時間」空白，永遠不會執行。</li>
+<li>沒加 <code>/y</code>：目的地已有 hosts 時會停在「覆寫嗎？」，狀態一直「執行中」(0x41301)。</li></ul></div>`},
 6:()=>`
 <div class="sub">建立帳號（GUI）</div>
 <ol class="steps">
@@ -353,12 +412,13 @@ gsettings get org.gnome.desktop.session idle-delay   # 應顯示 uint32 ${S.save
 <li>Windows 11 路徑：設定 → 時間與語言 → 語言與地區 → 中文(台灣) 旁的「…」→ 語言選項。</li></ul></div>`,
 10:()=>`
 <ol class="steps">
-<li>找到考場提供的字型檔（如 <code>${esc(S.font)}.ttf</code>，通常在指定資料夾或光碟）。</li>
-<li>在字型檔上按右鍵 →「<b>為所有使用者安裝</b>」。<br><span class="note">或把檔案拖進 <code>C:\\Windows\\Fonts</code>。</span></li>
-<li>驗證：設定 → 個人化 → 字型 → 搜尋「${esc(S.font)}」；或開 WordPad / Word 的字型下拉找到它。</li></ol>
+<li>開瀏覽器連到考場「軟體下載網站」，跳出「溫馨提醒」按「確定」。</li>
+<li>在「中文字型」列，用<b>滑鼠左鍵</b>點指定字型（${esc(S.font)}）的連結 → 檔案下載到「下載」資料夾。<b>不要在瀏覽器下載列直接開啟安裝。</b><br><span class="note">注意：網頁上顯示的檔名（DFFT_…）和實際下載的檔名（DFFN_…）可能不同，以「字型名稱」為準。</span></li>
+<li>開檔案總管 →「下載」→ 在字型檔上按右鍵 →「<b>為所有使用者安裝</b>」。<br><span class="note">或把檔案拖進 <code>C:\\Windows\\Fonts</code>。</span></li>
+<li>驗證：設定 → 個人化 → 字型 → 搜尋「${esc(S.font)}」；或開 WordPad 的字型下拉找到它。</li></ol>
 <div class="tip"><b>評分重點／常見失分</b><ul>
-<li>漢鼎系列字型名稱很像（繁勘亭、繁中圓、繁顏體…），看清楚再裝。</li>
-<li>只按「安裝」（目前使用者）在某些環境下監評帳號會看不到，建議「為所有使用者安裝」。</li></ul></div>`,
+<li>字型名稱很像（華康行書體／隸書體／中黑體、漢鼎繁勘亭／繁中圓…），看清楚再點。</li>
+<li>只按「安裝」（目前使用者）在某些環境下監評帳號看不到，建議「為所有使用者安裝」。</li></ul></div>`,
 11:()=>{const on=S.office.map(o=>OFFICE[o]);const off=['word','excel','ppt'].filter(x=>!S.office.includes(x)).map(o=>OFFICE[o].replace(/（.*）/,'')).concat(['Access','Outlook','OneNote','Publisher','InfoPath 等']);return `
 <ol class="steps">
 <li>執行 Office 安裝資料夾中的 <code>setup.exe</code> → 輸入產品金鑰（依考場提供）→ 接受授權。</li>
@@ -396,17 +456,23 @@ bye</pre></li></ol>
 <div class="tip"><b>評分重點／常見失分</b><ul>
 <li>沒先 <code>lcd</code>，<code>put</code> 會在目前目錄（C:\\Users\\使用者）找不到檔案。</li>
 <li>直接 <code>put ${esc(S.transfer)}</code> 某些伺服器會把完整路徑當檔名，建議先 lcd 再 put。</li></ul></div>`,
-14:()=>`
+14:()=>{const st=esc(baseOf(S.zip).replace(/\.[^.]+$/,''));return `
+<div class="sub">方法一：Windows 內建壓縮</div>
 <ol class="steps">
 <li>開檔案總管 → 進入 <code>${esc(dirOf(S.zip))}</code> → 找到 <code>${esc(baseOf(S.zip))}</code>。</li>
 <li>按右鍵 →「傳送到」→「<b>壓縮的 (zipped) 資料夾</b>」。<br><span class="note">Windows 11：右鍵 →「壓縮成 ZIP 檔案」。</span></li>
-<li>系統說無法在此建立，詢問「要改為放在桌面上嗎？」→「是」。</li>
-<li>桌面出現 <code>${esc(baseOf(S.zip).replace(/\.[^.]+$/,''))}.zip</code>，雙擊確認裡面是 ${esc(baseOf(S.zip))}。</li></ol>
+<li>系統說無法在此建立，詢問「要改為放在桌面上嗎？」→「是」→ 桌面出現 <code>${st}.zip</code>。</li></ol>
+<div class="sub">方法二：考場下載的 WinZIP / WinRAR</div>
+<ol class="steps">
+<li>考場下載網站「壓縮軟體」列，左鍵點 WinZIP 或 WinRAR → 存到「下載」。</li>
+<li>到「下載」資料夾<b>點兩下</b>安裝程式 →「安裝」。</li>
+<li><code>C:\\Windows</code> 沒有寫入權限，WinRAR / WinZip 直接在那裡壓縮會「拒絕存取」：先把 <code>${esc(baseOf(S.zip))}</code>「複製」→ 到桌面「貼上」。</li>
+<li>在桌面那份檔案上按右鍵 → WinRAR「加到 "${st}.rar"」或 WinZip「Add to ${st}.zip」。</li></ol>
 <div class="sub">指令替代（PowerShell）</div>
-<pre class="cmd">Compress-Archive ${esc(S.zip)} $HOME\\Desktop\\${esc(baseOf(S.zip).replace(/\.[^.]+$/,''))}.zip</pre>
+<pre class="cmd">Compress-Archive ${esc(S.zip)} $HOME\\Desktop\\${st}.zip</pre>
 <div class="tip"><b>評分重點／常見失分</b><ul>
-<li>壓縮到錯的檔案（twain_32.dll 旁邊有 twain_32 資料夾等相似名稱）。</li>
-<li>依監評指示放置位置或上傳 FTP。</li></ul></div>`,
+<li>壓到錯的東西：<code>C:\\Windows</code> 裡有同名的 <code>twain_32</code> 資料夾和 <code>twain_32.dll</code> 檔案，要看清楚副檔名。</li>
+<li>依監評指示放置位置或上傳 FTP。</li></ul></div>`},
 15:()=>`
 <ol class="steps">
 <li>開「記事本」，輸入：<pre class="cmd">&lt;html&gt;
@@ -559,31 +625,149 @@ const SIM={
     return r},()=>`Windows：${S.winIP==='static'?'固定 '+ipv()+' / 255.255.255.0':'自動取得'}；Linux：${S.linIP==='static'?'手動 '+ipv():'自動 (DHCP)'}。`);
 },
 5(box){
-  const now=new Date(),pad=n=>String(n).padStart(2,'0');
-  const exp=new Date(now.getTime()+S.backupMin*60000),expS=pad(exp.getHours())+':'+pad(exp.getMinutes());
-  box.innerHTML=`<p class="simintro">模擬「工作排程器 → 建立基本工作」精靈。<b>目前系統時間：<span class="mono">${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}</span></b>（模擬時鐘已凍結）</p>
-  <div class="win"><div class="tt">建立基本工作精靈</div><div class="bd">
-  <div class="row"><label class="w">名稱</label><input type="text" placeholder="backup"></div>
-  <div class="row"><label class="w">觸發程序</label>${['每天','每週','每月','一次','電腦啟動時','登入時'].map((x,i)=>`<label><input type="radio" name="tr" value="${x}"${i===0?' checked':''}> ${x}</label>`).join(' ')}</div>
-  <div class="row"><label class="w">開始時間 (HH:MM)</label><input type="text" class="mono" style="width:80px" placeholder="${pad(now.getHours())}:${pad(now.getMinutes())}" data-tm></div>
-  <div class="row"><label class="w">動作</label><label><input type="radio" name="ac" value="run" checked> 啟動程式</label><label><input type="radio" name="ac" value="mail"> 傳送電子郵件（已淘汰）</label><label><input type="radio" name="ac" value="msg"> 顯示訊息（已淘汰）</label></div>
-  <div class="row"><label class="w">程式或指令碼</label><input type="text" class="mono" style="flex:1" data-pg></div>
-  <div class="row"><label class="w">新增引數 (選擇性)</label><input type="text" class="mono" style="flex:1" data-ag></div>
-  <div class="row"><label class="w"></label><span class="note">資料磁區已有資料夾 D:\\backup</span></div></div></div>`;
-  checkBar(box,()=>{const r=[];const tr=$('[name=tr]:checked',box).value,tm=$('[data-tm]',box).value.trim().replace(/^(\d):/,'0$1:');
-    r.push([tr==='一次'?true:tr==='每天'?null:false,tr==='一次'?'觸發程序：一次':tr==='每天'?'「每天」也會執行，但題意是指定時間執行一次，建議選「一次」':'觸發程序不正確（'+tr+'），應選「一次」']);
-    r.push([tm===expS,`開始時間「${esc(tm)||'（空白）'}」${tm===expS?'= 目前時間 + '+S.backupMin+' 分':'，應為 '+expS}`]);
-    r.push([$('[name=ac]:checked',box).value==='run','動作：啟動程式']);
-    const pg=$('[data-pg]',box).value.trim().replace(/"/g,''),ag=$('[data-ag]',box).value.trim().replace(/"/g,'');
-    const full=(pg+' '+ag).toLowerCase();const src=backupPath().toLowerCase();const pgl=pg.toLowerCase();
-    if(/^copy$/.test(pgl))r.push([false,'copy 是 cmd 內建指令，程式要填 cmd.exe，引數填 /c copy …']);
-    else if(/(^|\\)cmd(\.exe)?$/.test(pgl)&&!/^\/c\s/i.test(ag))r.push([false,'cmd.exe 的引數要以 /c 開頭']);
-    else if(!/copy/.test(full))r.push([false,'沒有使用 copy / xcopy / robocopy 複製指令']);
-    else r.push([true,'使用複製指令']);
-    const idx=full.indexOf(src);
-    r.push([idx>=0,idx>=0?'來源檔案路徑正確':'來源應為 '+esc(backupPath())]);
-    r.push([idx>=0&&/[a-z]:\\/.test(full.slice(idx+src.length)),'目的地要寫到資料磁區（如 D:\\backup\\）']);
-    return r},()=>`觸發程序「一次」，開始時間 <code>${expS}</code>；程式 <code>cmd.exe</code>，引數 <code>/c copy /y ${esc(backupPath())} D:\\backup\\</code>`);
+  const pad=n=>String(n).padStart(2,'0');
+  const fmtT=d=>`${d.getHours()<12?'上午':'下午'} ${pad(d.getHours()%12||12)}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+  const fmtD=d=>`${d.getFullYear()}/${d.getMonth()+1}/${d.getDate()}`;
+  const fmt=d=>fmtD(d)+' '+fmtT(d);
+  const dest=()=>sub(S.backupDest);
+  const Dv={folders:{'d:':'D:'},files:{}};
+  const now0=new Date(),tmr=new Date(now0.getTime()+86400000);
+  const tasks=[
+   {sys:true,name:'MicrosoftEdgeUpdateTaskMachineCore',status:'就緒',trigS:'在每天 上午 10:12 - 觸發程序在 1 天後到期。',next:fmtD(tmr)+' 上午 10:12:00',last:fmtD(now0)+' 上午 10:12:01',res:'作業已順利完成。 (0x0)'},
+   {sys:true,name:'OneDrive Reporting Task-S-1-5-21',status:'就緒',trigS:'在每天 上午 09:30',next:fmtD(tmr)+' 上午 09:30:00',last:fmtD(now0)+' 上午 09:30:04',res:'作業已順利完成。 (0x0)'},
+   {sys:true,name:'User_Feed_Synchronization-{8A3F}',status:'就緒',trigS:'在每天 下午 08:14',next:fmtD(now0)+' 下午 08:14:00',last:fmtD(new Date(now0-86400000))+' 下午 08:14:02',res:'作業已順利完成。 (0x0)'}];
+  let selT=-1,w=null,dSel=null;
+  const SKIP=['電腦啟動時','當我登入時','特定事件被記錄時'];
+  box.innerHTML=`<p class="simintro">模擬 Windows 10「工作排程器」。工作建立後依<b>真實時間</b>觸發（看右下角時鐘），也可以按「⏩ 快轉」立即觸發。資料磁區 D: 目前是空的。</p>
+  <div class="ts"><div class="tbar">🕒 工作排程器<span style="margin-left:auto;letter-spacing:12px">—☐✕</span></div>
+  <div class="menu"><span>檔案(F)</span><span>動作(A)</span><span>檢視(V)</span><span>說明(H)</span></div>
+  <div class="tsb"><div class="tree"><div>🕒 工作排程器 (本機)</div><div class="sel" style="padding-left:14px">📁 工作排程器程式庫</div><div style="padding-left:30px">📁 Microsoft</div></div>
+  <div class="center"><div class="tlw"><table class="tl"><thead><tr><th>名稱</th><th>狀態</th><th>觸發程序</th><th>下次執行時間</th><th>上次執行時間</th><th>上次執行結果</th></tr></thead><tbody data-tl></tbody></table></div><div data-det></div></div>
+  <div class="acts" data-acts></div></div>
+  <div class="taskbar"><span data-clk></span></div><div data-wz></div><div data-mb></div></div>
+  <div class="row" style="margin-bottom:12px"><button class="btn" data-ff>⏩ 快轉：立即觸發所有已排程的工作</button></div>
+  <div class="win"><div class="tt">檔案總管 — 資料 (D:)</div><div class="bd">
+  <div class="row"><button class="btn" data-nf>📁 新增資料夾</button><span data-nfb style="display:none"><input type="text" style="width:110px" placeholder="資料夾名稱"> <button class="btn pri" data-nfok>確定</button></span><button class="btn" data-dd>✕ 刪除</button></div>
+  <div class="dtree" data-dt></div></div></div>`;
+  const tl=$('[data-tl]',box),acts=$('[data-acts]',box),wzEl=$('[data-wz]',box),mb=$('[data-mb]',box),det=$('[data-det]',box);
+  function msg(title,text,btns){
+    mb.innerHTML=`<div class="mcover"></div><div class="msgbox"><div class="mt">${title}</div><div class="mc">${text}</div><div class="mf">${btns.map((b,i)=>`<button class="btn${i===0?' pri':''}" data-i="${i}">${b[0]}</button>`).join('')}</div></div>`;
+    $$('[data-i]',mb).forEach(x=>x.onclick=()=>{mb.innerHTML='';const f=btns[+x.dataset.i][1];if(f)f()})}
+  function drawTasks(){
+    tl.innerHTML=tasks.map((t,i)=>`<tr data-i="${i}" class="${i===selT?'sel':''}"><td>🕒 ${esc(t.name)}</td><td>${t.status}</td><td>${esc(t.trigS)}</td><td>${t.next}</td><td>${t.last}</td><td>${esc(t.res)}</td></tr>`).join('');
+    $$('tr',tl).forEach(r=>r.onclick=()=>{selT=+r.dataset.i;drawTasks()});
+    const t=tasks[selT];
+    det.innerHTML=t&&t.user?`<div class="detb"><b>一般</b>　名稱：${esc(t.name)}<br><b>觸發程序</b>　${esc(t.trig)}　${esc(t.trigS)}<br><b>動作</b>　啟動程式　程式：<span class="mono">${esc(t.prog)}</span>　引數：<span class="mono">${esc(t.args)||'（無）'}</span>${t.why?`<br><b style="color:#c00">記錄</b>　${esc(t.why)}`:''}</div>`:'';
+    acts.innerHTML=`<h4>動作</h4><div class="ah">工作排程器程式庫 ▴</div><div data-a="basic">🕒 建立基本工作...</div><div data-a="adv">🕒 建立工作...</div><div data-a="x">匯入工作...</div><div data-a="x">顯示所有執行中的工作</div><div data-a="x">新資料夾...</div><div data-a="ref">🔄 重新整理</div>`+(t?`<div class="ah">選取的項目 ▴</div><div data-a="run">▶ 執行</div><div data-a="x">■ 結束</div><div data-a="x">⬇ 停用</div><div data-a="x">匯出...</div><div data-a="x">內容</div><div data-a="del">✕ 刪除</div>`:'');
+    $$('[data-a]',acts).forEach(a=>a.onclick=()=>{const k=a.dataset.a;
+      if(k==='basic')openWiz();else if(k==='adv')msg('工作排程器','本練習請使用「建立基本工作...」。',[['確定']]);
+      else if(k==='ref')drawTasks();else if(k==='run'){if(t.user)run(t);else{t.last=fmt(new Date());drawTasks()}}
+      else if(k==='del')msg('工作排程器',`確定要刪除這個工作嗎？<br><br><b>${esc(t.name)}</b>`,[['是(Y)',()=>{tasks.splice(selT,1);selT=-1;drawTasks()}],['否(N)']])})}
+  function drawD(){const dt=$('[data-dt]',box);const fs=Object.keys(Dv.folders).filter(k=>k!=='d:').sort(),files=Object.keys(Dv.files);
+    let h='<div>💽 資料 (D:)</div>'+fs.map(f=>`<div class="di${dSel===f?' sel':''}" data-p="${esc(f)}" style="padding-left:18px">📁 ${esc(baseOf(Dv.folders[f]))}</div>`+files.filter(x=>dirOf(x)===f).map(x=>`<div class="di${dSel===x?' sel':''}" data-p="${esc(x)}" style="padding-left:40px">📄 ${esc(baseOf(Dv.files[x]))}</div>`).join('')).join('')
+      +files.filter(x=>dirOf(x)==='d:').map(x=>`<div class="di${dSel===x?' sel':''}" data-p="${esc(x)}" style="padding-left:18px">📄 ${esc(baseOf(Dv.files[x]))} <span class="note">← 這是「檔案」，不是資料夾</span></div>`).join('');
+    if(!fs.length&&!files.length)h+='<div class="note" style="padding-left:18px">（此資料夾是空的）</div>';
+    dt.innerHTML=h;$$('.di',dt).forEach(d=>d.onclick=()=>{dSel=d.dataset.p;drawD()})}
+  $('[data-nf]',box).onclick=()=>{const b=$('[data-nfb]',box);b.style.display='inline';$('input',b).value=XX;$('input',b).focus()};
+  $('[data-nfok]',box).onclick=()=>{const v=$('[data-nfb] input',box).value.trim();if(!v||/[\\/:*?"<>|]/.test(v))return;const k='d:\\'+v.toLowerCase();
+    if(Dv.files[k]){alertD('已有名為「'+v+'」的檔案，請先刪除');return}Dv.folders[k]='D:\\'+v;$('[data-nfb]',box).style.display='none';drawD()};
+  $('[data-dd]',box).onclick=()=>{if(!dSel)return;if(Dv.folders[dSel]){Object.keys(Dv.files).forEach(f=>{if(dirOf(f)===dSel)delete Dv.files[f]});delete Dv.folders[dSel]}else delete Dv.files[dSel];dSel=null;drawD()};
+  function alertD(m){const d=document.createElement('div');d.className='dlg';d.textContent=m;$('[data-dt]',box).before(d);setTimeout(()=>d.remove(),2500)}
+  const tok=s=>(s.match(/"[^"]*"|\S+/g)||[]).map(x=>x.replace(/^"|"$/g,''));
+  const TXT={'0x0':'作業已順利完成。 (0x0)','0x1':'(0x1)','0x80070002':'系統找不到指定的檔案。 (0x80070002)','0x41301':'工作目前正在執行。 (0x41301)'};
+  const R=(code,why,extra)=>Object.assign({code,why,text:TXT[code]},extra||{});
+  function simulate(t,apply){
+    const p=t.prog.replace(/"/g,'').trim(),b=baseOf(p).toLowerCase().replace(/\.exe$/,'');let inner,hangAfter=false;
+    if(b==='cmd'){const a=tok(t.args);if(!a.length)return R('0x41301','cmd 沒有引數：命令視窗開著不會結束',{hang:true});const s=a[0].toLowerCase();
+      if(s==='/k')hangAfter=true;else if(s!=='/c')return R('0x41301','cmd 的引數要以 /c 開頭，否則 copy 不會執行、視窗也不會結束',{hang:true});inner=a.slice(1)}
+    else if(b==='xcopy'||b==='robocopy')inner=[b,...tok(t.args)];
+    else return R('0x80070002',b==='copy'?'找不到程式「copy」：copy 是 cmd 內建指令不是 .exe，要用 cmd ＋ /c copy …':'找不到程式「'+p+'」');
+    if(!inner.length)return R('0x1','/c 後面沒有指令');
+    const c=inner[0].toLowerCase();if(!['copy','xcopy','robocopy'].includes(c))return R('0x1',`「${inner[0]}」不是內部或外部命令`);
+    const ex=s=>s.replace(/%(windir|systemroot)%/ig,'C:\\Windows');
+    const rest=inner.slice(1),sw=rest.filter(x=>x.startsWith('/')).map(x=>x.toLowerCase()),ps=rest.filter(x=>!x.startsWith('/')).map(ex);
+    let src=ps[0],dst=ps[1];if(c==='robocopy'&&ps[2])src=ps[0].replace(/\\$/,'')+'\\'+ps[2];
+    const want=backupPath();
+    if(!src)return R('0x1','缺少來源檔案');
+    if(src.toLowerCase()!==want.toLowerCase())return R('0x1',/\\driver\\/i.test(src)?'系統找不到指定的路徑：driver 少了 s，應為 drivers':'系統找不到指定的檔案：'+src);
+    if(!dst)return R('0x1','缺少目的地：copy 會複製到目前目錄 C:\\Windows\\System32，「檔案無法複製到自己」');
+    const trail=/\\$/.test(dst);let dl=dst.replace(/\\+$/,'').toLowerCase();
+    if(!/^d:/.test(dl))return R('0x1',/^c:/.test(dl)?'目的地在 C: 系統磁區，請備份到資料磁區 D:':'系統找不到指定的磁碟機：'+dst);
+    const fname=baseOf(want).toLowerCase();let target,mis=false;
+    if(Dv.folders[dl])target=dl+'\\'+fname;
+    else if(trail)return R('0x1','系統找不到指定的路徑：資料夾 '+dst+' 不存在');
+    else if(Dv.folders[dirOf(dl)]){if(c==='xcopy')return R('0x41301','xcopy 停在「目的地是檔案名稱還是目錄？」等待回答',{hang:true});target=dl;mis=true}
+    else return R('0x1','系統找不到指定的路徑：'+dst);
+    const disp=(Dv.folders[dirOf(target)]||'D:')+'\\'+(mis?dst.replace(/\\+$/,'').split('\\').pop():baseOf(want));
+    if(Dv.files[target]&&!sw.includes('/y')&&c==='copy')return R('0x41301','目的地已有同名檔案，copy 停在「覆寫嗎？(Yes/No/All)」等待回答（加 /y 可避免）',{hang:true});
+    if(apply)Dv.files[target]=disp;
+    return R(hangAfter?'0x41301':'0x0',hangAfter?'用了 /k：複製完成但命令視窗留著不結束，應改用 /c':(mis?`D:\\ 沒有「${disp.split('\\').pop()}」資料夾，copy 把 hosts 複製成一個名為「${disp.split('\\').pop()}」的檔案`:''),{hang:hangAfter,target,mis,disp});
+  }
+  function run(t){const r=simulate(t,true);t.ran=true;t.runRes=r;t.last=fmt(new Date());t.res=r.text;t.status=r.hang?'執行中':'就緒';t.why=r.why||'';if(t.trig==='一次')t.next='';drawTasks();drawD()}
+  const iv=setInterval(()=>{if(simCache[5]!==box&&!box.isConnected){clearInterval(iv);return}const n=new Date();const ck=$('[data-clk]',box);if(ck)ck.innerHTML=fmtT(n)+'<br>'+fmtD(n);
+    tasks.forEach(t=>{if(t.user&&!t.ran&&t.start&&n>=t.start)run(t)})},1000);
+  $('[data-ff]',box).onclick=()=>{const p=tasks.filter(t=>t.user&&!t.ran&&t.start);if(!p.length){msg('快轉','沒有等待觸發的工作。（開始時間已過、或觸發程序為「電腦啟動時」等的工作不會觸發）',[['確定']]);return}p.forEach(run)};
+  // ---- 精靈 ----
+  function openWiz(){const n=new Date();w={i:0,name:'',desc:'',trig:'每天',date:fmtD(n),time:fmtT(n),sync:false,every:'1',act:'啟動程式',prog:'',args:'',cwd:''};drawWiz()}
+  const steps=()=>{const s=['name','trig'];if(!SKIP.includes(w.trig))s.push('when');s.push('act',w.act==='啟動程式'?'prog':'dep','sum');return s};
+  const lab=k=>({name:'建立基本工作',trig:'觸發程序',when:w.trig,act:'動作',prog:'啟動程式',dep:w.act,sum:'完成'})[k];
+  const head=k=>({name:'建立基本工作',trig:'工作觸發程序',when:w.trig,act:'動作',prog:'啟動程式',dep:w.act,sum:'摘要'})[k];
+  function save(){$$('[data-f]',wzEl).forEach(i=>{const f=i.dataset.f;if(i.type==='radio'){if(i.checked)w[f]=i.value}else if(i.type==='checkbox')w[f]=i.checked;else w[f]=i.value})}
+  function parseDT(){const a=String(w.date).match(/(\d{4})\D(\d{1,2})\D(\d{1,2})/),b=String(w.time).match(/(上午|下午|AM|PM)?\s*(\d{1,2}):(\d{2})(?::(\d{2}))?/i);if(!a||!b)return null;
+    let h=+b[2];const ap=(b[1]||'').toUpperCase();if((ap==='下午'||ap==='PM')&&h<12)h+=12;if((ap==='上午'||ap==='AM')&&h===12)h=0;if(h>23||+b[3]>59||+(b[4]||0)>59)return null;return new Date(+a[1],+a[2]-1,+a[3],h,+b[3],+(b[4]||0))}
+  function trigText(){const d=parseDT();if(w.trig==='一次')return d?`在 ${fmt(d)}`:'';if(w.trig==='每天')return d?`在每天 ${fmtT(d)}`:'';if(w.trig==='每週')return d?`在每週 ${fmtT(d)}`:'';if(w.trig==='每月')return '在每月';if(w.trig==='電腦啟動時')return '在系統啟動時';if(w.trig==='當我登入時')return '在任何使用者登入時';return '在事件記錄時'}
+  function drawWiz(){if(!w){wzEl.innerHTML='';return}const st=steps(),k=st[w.i];let c='';
+    if(k==='name')c=`<div class="row"><label class="w2">名稱(A):</label><input type="text" data-f="name" value="${esc(w.name)}" style="flex:1"></div><div class="row" style="align-items:flex-start"><label class="w2">描述(D):</label><textarea data-f="desc" style="flex:1;height:70px">${esc(w.desc)}</textarea></div>`;
+    if(k==='trig')c=`<div style="margin-bottom:8px">您希望工作何時開始？</div>`+['每天(D)','每週(W)','每月(M)','一次(O)','電腦啟動時(H)','當我登入時(L)','特定事件被記錄時(E)'].map(x=>{const v=x.replace(/\(.\)/,'');return `<div style="margin:5px 0 5px 12px"><label><input type="radio" name="wt5" data-f="trig" value="${v}"${w.trig===v?' checked':''}> ${x}</label></div>`}).join('');
+    if(k==='when')c=`<div class="row"><label class="w2">開始(S):</label><input type="text" data-f="date" value="${esc(w.date)}" style="width:104px" class="mono"><input type="text" data-f="time" value="${esc(w.time)}" style="width:118px" class="mono"><label><input type="checkbox" data-f="sync"${w.sync?' checked':''}> 跨時區同步(Z)</label></div>`
+      +(w.trig==='每天'?`<div class="row"><label class="w2">每隔(C):</label><input type="text" data-f="every" value="${esc(w.every)}" style="width:44px"> 天重複</div>`:w.trig==='每週'?`<div class="row"><label class="w2">每隔(C):</label><input type="text" data-f="every" value="${esc(w.every)}" style="width:44px"> 週重複於：</div><div class="row" style="margin-left:12px">${['星期日','星期一','星期二','星期三','星期四','星期五','星期六'].map(d=>`<label><input type="checkbox"> ${d}</label>`).join(' ')}</div>`:w.trig==='每月'?'<div class="row"><label class="w2">月份(M):</label><select><option>選取月份...</option></select></div>':'')
+      +`<div class="note" style="margin-top:10px">（模擬：時間欄位可直接改數字，格式「下午 03:27:00」）</div>`;
+    if(k==='act')c=`<div style="margin-bottom:8px">您希望工作執行什麼動作？</div>`+[['啟動程式','啟動程式(T)'],['傳送電子郵件','傳送電子郵件 (已淘汰)(S)'],['顯示訊息','顯示訊息 (已淘汰)(M)']].map(([v,l])=>`<div style="margin:5px 0 5px 12px"><label><input type="radio" name="wa5" data-f="act" value="${v}"${w.act===v?' checked':''}> ${l}</label></div>`).join('');
+    if(k==='prog')c=`<div>程式或指令碼(P):</div><div class="row"><input type="text" data-f="prog" value="${esc(w.prog)}" style="flex:1" class="mono"><button class="btn" data-br>瀏覽(R)...</button></div><div data-brl></div>
+      <div class="row"><label class="w2">新增引數 (選擇性)(A):</label><input type="text" data-f="args" value="${esc(w.args)}" style="flex:1;min-width:150px" class="mono"></div>
+      <div class="row"><label class="w2">開始位置 (選擇性)(T):</label><input type="text" data-f="cwd" value="${esc(w.cwd)}" style="flex:1;min-width:150px" class="mono"></div>`;
+    if(k==='dep')c=`<div>此動作已淘汰，工作排程器不再支援「${w.act}」。<br>請按「上一步」改選「啟動程式」。</div>`;
+    if(k==='sum')c=`<table class="sumt"><tr><td>名稱:</td><td>${esc(w.name)}</td></tr><tr><td>描述:</td><td>${esc(w.desc)}</td></tr></table>
+      <table class="sumt" style="margin-top:14px"><tr><td>觸發程序:</td><td>${w.trig}; ${esc(trigText())}</td></tr><tr><td>動作:</td><td>啟動程式; <span class="mono">${esc(w.prog)}${w.args?' '+esc(w.args):''}</span></td></tr></table>
+      <div style="margin-top:16px"><label><input type="checkbox"> 按 [完成] 時，開啟此工作的 [內容] 對話方塊</label></div><div class="note" style="margin-top:6px">按一下 [完成] 時，新工作將會建立並新增至您的 Windows 排程。</div>`;
+    wzEl.innerHTML=`<div class="mcover"></div><div class="wz"><div class="wt">建立基本工作精靈<span data-c style="margin-left:auto;cursor:pointer">✕</span></div><div class="wh"><span style="font-size:22px">🕒</span> ${head(k)}</div>
+      <div class="wb"><div class="ws">${st.map((s,i)=>`<div class="${i===w.i?'cur':''}">${lab(s)}</div>`).join('')}</div><div class="wc">${c}</div></div>
+      <div class="wf"><button class="btn" data-b ${w.i===0?'disabled':''}>&lt; 上一步(B)</button>${k==='sum'?'<button class="btn pri" data-fin>完成(F)</button>':'<button class="btn pri" data-n>下一步(N) &gt;</button>'}<button class="btn" data-c>取消</button></div></div>`;
+    $$('[data-f=trig],[data-f=act]',wzEl).forEach(r=>r.onchange=()=>{save();drawWiz()});
+    $$('[data-c]',wzEl).forEach(x=>x.onclick=()=>{w=null;drawWiz()});
+    const bk=$('[data-b]',wzEl);bk.onclick=()=>{save();w.i--;drawWiz()};
+    const nx=$('[data-n]',wzEl);if(nx)nx.onclick=()=>{save();validate(k,()=>{w.i++;drawWiz()})};
+    const fn=$('[data-fin]',wzEl);if(fn)fn.onclick=finish;
+    const br=$('[data-br]',wzEl);if(br)br.onclick=()=>{const l=$('[data-brl]',wzEl);l.innerHTML=`<div class="brl"><div class="note">開啟 — C:\\Windows\\System32</div>${['cmd.exe','notepad.exe','Robocopy.exe','xcopy.exe'].map(f=>`<div data-pk="${f}">⚙ ${f}</div>`).join('')}</div>`;
+      $$('[data-pk]',l).forEach(x=>x.onclick=()=>{save();w.prog='C:\\Windows\\System32\\'+x.dataset.pk;drawWiz()})};
+  }
+  function validate(k,go){
+    if(k==='name'&&!w.name.trim())return msg('工作排程器','必須指定工作名稱。',[['確定']]);
+    if(k==='when'&&!parseDT())return msg('工作排程器','指定的開始時間格式不正確。',[['確定']]);
+    if(k==='dep')return msg('工作排程器','此功能已淘汰，無法使用。',[['確定']]);
+    if(k==='prog'){const p=w.prog.trim();if(!p)return msg('工作排程器','必須指定要啟動的程式。',[['確定']]);
+      if(!/^"/.test(p)&&/\s/.test(p)){const i=p.search(/\s/),f=p.slice(0,i),rest=p.slice(i).trim();
+        return msg('工作排程器',`似乎在程式中包含引數。您要執行下列程式嗎？<br><br><span class="mono">${esc(f)}</span><br><br>使用下列引數：<br><br><span class="mono">${esc(rest)}</span>`,[['是(Y)',()=>{w.prog=f;w.args=rest+(w.args?' '+w.args:'');go()}],['否(N)',go]])}}
+    go()}
+  function finish(){const nm=w.name.trim();if(tasks.some(t=>t.name.toLowerCase()===nm.toLowerCase()))return msg('工作排程器','無法建立工作。<br>檔案已存在。（已有同名的工作）',[['確定']]);
+    const d=parseDT(),n=new Date();const t={user:true,name:nm,trig:w.trig,start0:d,start:null,prog:w.prog.trim(),args:w.args.trim(),created:n,status:'就緒',trigS:trigText(),next:'',last:'1999/11/30 上午 12:00:00',res:'此工作尚未執行。 (0x41303)',ran:false};
+    if(!SKIP.includes(w.trig)&&d){let s=new Date(d);if(w.trig!=='一次')while(s<=n)s=new Date(s.getTime()+86400000);if(s>n){t.start=s;t.next=fmt(s)}}
+    tasks.push(t);selT=tasks.length-1;w=null;drawWiz();drawTasks()}
+  drawTasks();drawD();
+  checkBar(box,()=>{const ut=tasks.filter(t=>t.user);if(!ut.length)return[[false,'尚未建立工作（右側「建立基本工作...」）']];
+    const t=ut[ut.length-1],r=[];
+    r.push([t.trig==='一次'?true:t.trig==='每天'?null:false,t.trig==='一次'?'觸發程序：一次':t.trig==='每天'?'「每天」也會執行，但題意是指定時間執行一次，建議選「一次」':`觸發程序「${t.trig}」不正確，應選「一次」`]);
+    if(t.start0){const diff=(t.start0-t.created)/1000;
+      if(diff<=0)r.push([false,`開始時間 ${fmtT(t.start0)} 早於按「完成」的時間 ${fmtT(t.created)}，工作不會執行`]);
+      else if(diff>S.backupMin*60+59)r.push([false,`開始時間在建立後約 ${Math.round(diff/60)} 分鐘，指定為 ${S.backupMin} 分鐘後`]);
+      else r.push([true,`開始時間 ${fmtT(t.start0)}，建立後約 ${Math.round(diff)} 秒觸發`])}
+    else if(!SKIP.includes(t.trig))r.push([false,'開始時間無效']);
+    const res=t.ran?t.runRes:simulate(t,false);
+    r.push([res.code==='0x0'&&!res.mis,`${t.ran?'執行':'模擬執行'}結果：${res.text}${res.why?' — '+res.why:''}`]);
+    if(res.target&&!res.mis){const exp=(dest()+'\\'+baseOf(backupPath())).toLowerCase();r.push([res.target===exp?true:null,res.target===exp?`${res.disp} 已備份`:`備份到 ${res.disp}；課堂設定的目的地是 ${dest()}`])}
+    if(!/(^|\s)\/y(\s|$)/i.test(t.args)&&!/(^|\s)\/y(\s|$)/i.test(t.prog))r.push([null,'建議加 /y，目的地已有檔案時才不會卡在「覆寫嗎？」']);
+    if(!t.ran)r.push([null,'工作還沒觸發，以上是模擬結果；等時間到或按「⏩ 快轉」看實際執行結果']);
+    return r},()=>`D: 先建資料夾 <code>${esc(baseOf(dest()))}</code>；觸發程序「一次」，時間 = 現在 + ${S.backupMin} 分；程式或指令碼 <code>cmd</code>；引數 <code>/c copy ${esc(backupPath())} ${esc(dest())} /y</code>`);
 },
 6(box){
   const users={},bg={};let auth=false;
@@ -699,25 +883,29 @@ sudo adduser ${esc(S.u2)}     ← 密碼 ${esc(S.p2)}</pre>再在下方替兩人
    ()=>`中文(台灣) → 新增鍵盤 <b>${esc(S.ime)}</b> → 移除其他中文鍵盤；英文(美國) 美式鍵盤可留可刪。`);
 },
 10(box){
-  const set=['漢鼎繁勘亭','漢鼎繁中圓','漢鼎繁顏體','漢鼎繁中變','漢鼎繁魏碑','漢鼎繁行書'];if(!set.includes(S.font))set.splice(2,0,S.font);
   const inst=['微軟正黑體','新細明體','標楷體','Arial','Times New Roman'];const mine=[];let selF=null;
-  box.innerHTML=`<p class="simintro">模擬考場提供的字型資料夾。點選字型檔 → 安裝，再到「字型」設定搜尋驗證。</p>
-  <div class="win"><div class="tt">檔案總管 — D:\\考場字型</div><div class="bd"><div class="files" data-f></div>
-  <div class="row"><button class="btn" data-i1>安裝</button><button class="btn" data-i2>為所有使用者安裝</button></div><div data-msg></div></div></div>
+  box.innerHTML=`<p class="simintro">考場會提供「軟體下載網站」：先到網站用<b>左鍵點連結下載</b>字型檔（請勿直接安裝），再到「下載」資料夾安裝。</p>
+  <div class="row" style="margin-bottom:10px"><button class="cbtn go" data-site>🌐 開啟考場下載網站</button></div>
+  <div class="win"><div class="tt">檔案總管 — 下載 (C:\\Users\\student\\Downloads)</div><div class="bd"><div class="files" data-f></div>
+  <div class="row"><button class="btn" data-i1>安裝</button><button class="btn" data-i2>為所有使用者安裝</button><button class="btn" data-pv>預覽</button></div><div data-msg></div></div></div>
   <div class="win"><div class="tt">設定 → 個人化 → 字型</div><div class="bd"><div class="row"><input type="text" placeholder="搜尋字型" data-q style="flex:1"></div><div class="files" data-l style="min-height:60px"></div></div></div>`;
-  const F=$('[data-f]',box),Lb=$('[data-l]',box),q=$('[data-q]',box);
-  function draw(){F.innerHTML=set.map(f=>`<div class="${f===selF?'sel':''}"><span class="ic">🅰</span>${f}.ttf</div>`).join('');
-    $$('div',F).forEach((d,i)=>{d.onclick=()=>{selF=set[i];draw()}});
-    const all=inst.concat(mine.map(m=>m.f));const k=q.value.trim();
+  const F=$('[data-f]',box),Lb=$('[data-l]',box),q=$('[data-q]',box),M=$('[data-msg]',box);
+  function draw(){F.innerHTML=DL.map(d=>`<div class="${d.file===selF?'sel':''}" data-n="${esc(d.file)}"><span class="ic">${d.kind==='font'?'🅰':d.kind==='arc'?'🗜':'⚙'}</span>${esc(d.file)}</div>`).join('')||'<span class="note">（此資料夾是空的，先到考場下載網站下載）</span>';
+    $$('[data-n]',F).forEach(d=>d.onclick=()=>{selF=d.dataset.n;draw()});
+    const all=inst.concat(mine.map(m=>m.f)),k=q.value.trim();
     Lb.innerHTML=all.filter(f=>!k||f.includes(k)).map(f=>`<div><span class="ic" style="font-size:20px">字</span>${f}</div>`).join('')||'<span class="note">找不到符合的字型</span>'}
-  const doI=all=>{if(!selF){$('[data-msg]',box).innerHTML='<div class="dlg">請先點選字型檔</div>';return}
-    const ex=mine.find(m=>m.f===selF);if(ex){ex.all=ex.all||all}else mine.push({f:selF,all});
-    $('[data-msg]',box).innerHTML=`<div class="dlg">已安裝 ${selF}${all?'（所有使用者）':'（目前使用者）'}</div>`;draw()};
-  $('[data-i1]',box).onclick=()=>doI(false);$('[data-i2]',box).onclick=()=>doI(true);q.oninput=draw;draw();
-  checkBar(box,()=>{const m=mine.find(x=>x.f===S.font);const r=[[!!m,m?`已安裝 ${S.font}`:`尚未安裝 ${S.font}`]];
+  const cur=()=>DL.find(d=>d.file===selF);
+  const doI=all=>{const it=cur();if(!it){M.innerHTML='<div class="dlg">請先點選檔案</div>';return}
+    if(it.kind!=='font'){M.innerHTML=`<div class="dlg">${esc(it.file)} 不是字型檔。</div>`;return}
+    const ex=mine.find(m=>m.f===it.font);if(ex)ex.all=ex.all||all;else mine.push({f:it.font,all});
+    M.innerHTML=`<div class="dlg">正在安裝字型… 已安裝「${esc(it.font)}」${all?'（所有使用者）':'（目前使用者）'}</div>`;draw()};
+  $('[data-i1]',box).onclick=()=>doI(false);$('[data-i2]',box).onclick=()=>doI(true);
+  $('[data-pv]',box).onclick=()=>{const it=cur();if(!it||it.kind!=='font'){M.innerHTML='<div class="dlg">請先點選字型檔</div>';return}M.innerHTML=`<div class="dlg">字型名稱：<b>${esc(it.font)}</b><br>檔案：${esc(it.file)}<br><span style="font-size:22px">電腦硬體裝修 ABC 123</span></div>`};
+  $('[data-site]',box).onclick=openSite;q.oninput=draw;REFRESH.add(draw);draw();
+  checkBar(box,()=>{const m=mine.find(x=>x.f===S.font);const r=[[!!m,m?`已安裝 ${S.font}`:`尚未安裝 ${S.font}`+(DL.some(d=>d.font===S.font)?'':'（先到考場下載網站下載）')]];
     if(m&&!m.all)r.push([null,'建議用「為所有使用者安裝」，監評換帳號也看得到']);
     const ex=mine.filter(x=>x.f!==S.font);if(ex.length)r.push([null,'另外安裝了：'+ex.map(x=>x.f).join('、')+'（非指定字型）']);return r},
-   ()=>`選 <b>${esc(S.font)}.ttf</b> →「為所有使用者安裝」。`);
+   ()=>{const f=SITE_FONTS().find(x=>x.name===S.font);return `考場下載網站 →「中文字型」列左鍵點 <b>${esc(S.font)}</b> → 「下載」資料夾中的 <code>${esc(f?f.href:'')}</code> →「為所有使用者安裝」。`});
 },
 11(box){
   const APPS=[['word','Microsoft Word'],['excel','Microsoft Excel'],['ppt','Microsoft PowerPoint'],['access','Microsoft Access'],['outlook','Microsoft Outlook'],['onenote','Microsoft OneNote'],['publisher','Microsoft Publisher'],['infopath','Microsoft InfoPath'],['shared','Office 共用功能'],['tools','Office 工具']];
@@ -737,37 +925,62 @@ sudo adduser ${esc(S.u2)}     ← 密碼 ${esc(S.p2)}</pre>再在下方替兩人
   const zipBase=baseOf(S.zip),zipDir=dirOf(S.zip);
   const winF=['bootstat.dat','explorer.exe','HelpPane.exe','notepad.exe','regedit.exe','system.ini','twain_32','twain_32.dll','win.ini','WindowsUpdate.log','write.exe'];
   if(!winF.includes(zipBase))winF.push(zipBase);
+  const LOCS={win:zipDir,dl:'C:\\Users\\student\\Downloads',desk:'C:\\Users\\student\\Desktop'};
   let loc='win',selF=null,menu=null;
-  box.innerHTML=`<p class="simintro">模擬檔案總管：點選檔案後按<b>右鍵</b>（觸控裝置可用「⋯ 右鍵選單」按鈕）。</p>
+  box.innerHTML=`<p class="simintro">模擬檔案總管。可用 Windows 內建壓縮；也可從考場下載網站下載 WinZIP / WinRAR，在「下載」資料夾<b>點兩下安裝</b>後，右鍵選單會多出它們的選項。觸控裝置請用「⋯ 右鍵選單」。</p>
+  <div class="row" style="margin-bottom:10px"><button class="cbtn go" data-site>🌐 開啟考場下載網站</button></div>
   <div class="win" style="position:relative"><div class="tt">檔案總管</div><div class="bd">
-  <div class="row"><button class="btn" data-g="win">📁 ${esc(zipDir)}</button><button class="btn" data-g="desk">🖥 桌面</button><span class="mono note" data-p></span><button class="btn" data-ctx style="margin-left:auto">⋯ 右鍵選單</button></div>
-  <div class="files" data-f></div><div data-dlg></div></div></div>`;
+  <div class="row"><button class="btn" data-g="win">📁 ${esc(zipDir)}</button><button class="btn" data-g="dl">⬇ 下載</button><button class="btn" data-g="desk">🖥 桌面</button><button class="btn" data-paste style="display:none">📋 貼上</button><button class="btn" data-ctx style="margin-left:auto">⋯ 右鍵選單</button></div>
+  <div class="mono note" data-p></div><div class="files" data-f></div><div data-dlg></div></div></div>`;
   const F=$('[data-f]',box),wrapEl=$('.win',box),dlg=$('[data-dlg]',box);
-  const items=()=>loc==='win'?winF.map(n=>({n,dir:!/\./.test(n)})):DESK.map(d=>({n:d.name,zip:true}));
-  const uniq=n=>{let k=n,i=2;while(DESK.some(d=>d.name===k)){k=n.replace(/\.zip$/,` (${i++}).zip`)}return k};
-  function draw(){$('[data-p]',box).textContent=loc==='win'?zipDir:'C:\\Users\\student\\Desktop';
-    F.innerHTML=items().map(it=>`<div class="${it.n===selF?'sel':''}" data-n="${esc(it.n)}"><span class="ic">${it.dir?'📁':it.zip?'🗜':/\.exe$/i.test(it.n)?'⚙':/\.dll$/i.test(it.n)?'🧩':'📄'}</span>${esc(it.n)}</div>`).join('')||'<span class="note">（空的）</span>';
-    $$('[data-n]',F).forEach(d=>{d.onclick=()=>{selF=d.dataset.n;closeM();draw()};d.oncontextmenu=e=>{e.preventDefault();selF=d.dataset.n;draw();openM(e)}})}
+  const stem=n=>n.replace(/\.[^.]+$/,'');
+  const items=()=>loc==='win'?winF.map(n=>({n,dir:!/\./.test(n)})):loc==='dl'?DL.map(d=>({n:d.file,d})):DESK.map(d=>({n:d.name,d}));
+  const icon=it=>it.dir?'📁':/\.rar$/i.test(it.n)?'📚':/\.zip$/i.test(it.n)?'🗜':/\.(exe|msi)$/i.test(it.n)?'⚙':/\.dll$/i.test(it.n)?'🧩':/\.(ttc|ttf)$/i.test(it.n)?'🅰':'📄';
+  const getIt=()=>items().find(x=>x.n===selF);
+  const srcOf=it=>it.d&&it.d.kind==='file'?it.d.src:LOCS[loc]+'\\'+it.n;
+  function uniq(list,n){let k=n,i=2;while(list.some(x=>x===k)){k=stem(n)+` (${i++})`+n.slice(stem(n).length)}return k}
+  function put(name,src,kind){if(loc==='desk')DESK.push({name:uniq(DESK.map(d=>d.name),name),src,kind});else DL.push({file:uniq(DL.map(d=>d.file),name),src,kind});REFRESH.forEach(f=>f())}
+  function draw(){$('[data-p]',box).textContent=LOCS[loc];$('[data-paste]',box).style.display=CLIP?'':'none';
+    F.innerHTML=items().map(it=>`<div class="${it.n===selF?'sel':''}" data-n="${esc(it.n)}"><span class="ic">${icon(it)}</span>${esc(it.n)}</div>`).join('')||'<span class="note">（此資料夾是空的）</span>';
+    $$('[data-n]',F).forEach(d=>{d.onclick=()=>{selF=d.dataset.n;closeM();draw()};d.ondblclick=()=>{selF=d.dataset.n;op('open')};d.oncontextmenu=e=>{e.preventDefault();selF=d.dataset.n;draw();openM(e)}})}
   function closeM(){if(menu){menu.remove();menu=null}}
-  function openM(e){closeM();if(!selF)return;const r=wrapEl.getBoundingClientRect();
+  function openM(e){closeM();const it=getIt();if(!it)return;const r=wrapEl.getBoundingClientRect(),st=esc(stem(it.n));
     menu=document.createElement('div');menu.className='ctx';
-    menu.style.left=Math.max(4,Math.min((e.clientX||r.left+60)-r.left,r.width-210))+'px';menu.style.top=((e.clientY||r.top+130)-r.top)+'px';
-    menu.innerHTML=`<div data-x>開啟</div><div class="dis">以系統管理員身分執行</div><hr><div data-s>傳送到 ▸</div><div data-sub style="display:none;padding:0;background:#fff;margin-left:12px;border-left:2px solid #ccc"><div data-z>🗜 壓縮的 (zipped) 資料夾</div><div data-x>🖥 桌面 (建立捷徑)</div><div data-x>📄 文件</div></div><hr><div data-x>複製</div><div class="dis">刪除</div><div data-x>內容</div>`;
+    menu.style.left=Math.max(4,Math.min((e.clientX||r.left+60)-r.left,r.width-230))+'px';menu.style.top=((e.clientY||r.top+130)-r.top)+'px';
+    menu.innerHTML=`<div data-op="open">開啟(O)</div>`+(INST.has('winrar')?`<hr><div data-op="rarA">📚 加入壓縮檔(A)...</div><div data-op="rarT">📚 加到 "${st}.rar"(T)</div>`:'')+(INST.has('winzip')?`<hr><div data-op="wz">🗜 WinZip ▸ Add to ${st}.zip</div>`:'')
+      +`<hr><div data-s>傳送到(N) ▸</div><div data-sub style="display:none;padding:0;background:#fff;margin-left:12px;border-left:2px solid #ccc"><div data-op="send">🗜 壓縮的 (zipped) 資料夾</div><div data-op="x">🖥 桌面 (建立捷徑)</div><div data-op="x">📄 文件</div></div><hr><div data-op="copy">複製(C)</div><div class="dis">刪除(D)</div><div data-op="x">內容(R)</div>`;
     wrapEl.appendChild(menu);
     $('[data-s]',menu).onclick=ev=>{ev.stopPropagation();const s=$('[data-sub]',menu);s.style.display=s.style.display==='none'?'block':'none'};
-    $$('[data-x]',menu).forEach(x=>x.onclick=closeM);
-    $('[data-z]',menu).onclick=()=>{closeM();const src=selF,zn=src.replace(/\.[^.]+$/,'')+'.zip';
+    $$('[data-op]',menu).forEach(x=>x.onclick=()=>op(x.dataset.op))}
+  const denied=(tool,name)=>{dlg.innerHTML=`<div class="dlg">⚠ <b>${tool}</b>：無法建立 ${esc(zipDir)}\\${esc(name)}<br>存取被拒。<br><span class="note">C:\\Windows 需要系統管理員權限。請先「複製」檔案，到桌面「貼上」後再壓縮。</span><div class="row"><button class="btn pri" data-k>確定</button></div></div>`;$('[data-k]',dlg).onclick=()=>dlg.innerHTML=''};
+  function op(k){closeM();const it=getIt();if(!it)return;const st=stem(it.n);
+    if(k==='open'){if(loc==='dl'&&it.d&&it.d.app){const a=it.d;
+        if(INST.has(a.app)){dlg.innerHTML=`<div class="dlg">${esc(a.label)} 已經安裝過了。</div>`;return}
+        dlg.innerHTML=`<div class="dlg">⚙ <b>${esc(a.label)} 安裝程式</b><br>目的資料夾：C:\\Program Files\\${esc(a.label)}<div class="row"><button class="btn pri" data-ok>安裝</button><button class="btn" data-no>取消</button></div></div>`;
+        $('[data-ok]',dlg).onclick=()=>{INST.add(a.app);dlg.innerHTML=`<div class="dlg">✔ 已安裝 ${esc(a.label)}${['winrar','winzip'].includes(a.app)?'，右鍵選單已加入它的選項':'（本項用不到）'}</div>`};$('[data-no]',dlg).onclick=()=>dlg.innerHTML=''}
+      else if(it.dir){dlg.innerHTML='<div class="dlg">（模擬中不展開系統資料夾）</div>'}
+      else dlg.innerHTML='';return}
+    if(k==='copy'){CLIP={name:it.n,src:srcOf(it)};dlg.innerHTML=`<div class="dlg">已複製 ${esc(it.n)}，到桌面按「📋 貼上」。</div>`;draw();return}
+    if(k==='send'){const nm=st+'.zip';
       if(loc==='win'){dlg.innerHTML=`<div class="dlg">📦 壓縮的 (zipped) 資料夾<br>Windows 無法在此處建立壓縮的 (zipped) 資料夾。<br>要改為放在桌面上嗎？<div class="row"><button class="btn pri" data-y>是(Y)</button><button class="btn" data-no>否(N)</button></div></div>`;
-        $('[data-y]',dlg).onclick=()=>{const nm=uniq(zn);DESK.push({name:nm,src:zipDir+'\\'+src});dlg.innerHTML='<div class="dlg">✔ 已在桌面建立 '+esc(nm)+'</div>'};
-        $('[data-no]',dlg).onclick=()=>dlg.innerHTML=''}
-      else{DESK.push({name:uniq(zn),src:'C:\\Users\\student\\Desktop\\'+src});draw()}}}
+        $('[data-y]',dlg).onclick=()=>{const n=uniq(DESK.map(d=>d.name),nm);DESK.push({name:n,src:srcOf(it),kind:'zip'});dlg.innerHTML='<div class="dlg">✔ 已在桌面建立 '+esc(n)+'</div>'};$('[data-no]',dlg).onclick=()=>dlg.innerHTML=''}
+      else{put(nm,srcOf(it),'zip');draw()}return}
+    if(k==='rarT'){if(loc==='win')return denied('WinRAR',st+'.rar');put(st+'.rar',srcOf(it),'rar');dlg.innerHTML=`<div class="dlg">✔ WinRAR 已建立 ${esc(st)}.rar</div>`;draw();return}
+    if(k==='wz'){if(loc==='win')return denied('WinZip',st+'.zip');put(st+'.zip',srcOf(it),'zip');dlg.innerHTML=`<div class="dlg">✔ WinZip 已建立 ${esc(st)}.zip</div>`;draw();return}
+    if(k==='rarA'){dlg.innerHTML=`<div class="dlg"><b>壓縮檔名稱及參數</b><div class="row"><label>壓縮檔名稱(A)</label><input type="text" data-an value="${esc(st)}.rar" style="flex:1"></div><div class="row">壓縮檔格式：<label><input type="radio" name="af14" value="rar" checked> RAR</label><label><input type="radio" name="af14" value="zip"> ZIP</label></div><div class="row"><button class="btn pri" data-ok>確定</button><button class="btn" data-no>取消</button></div></div>`;
+      $$('[name=af14]',dlg).forEach(r=>r.onchange=()=>{const i=$('[data-an]',dlg);i.value=stem(i.value)+'.'+r.value});
+      $('[data-no]',dlg).onclick=()=>dlg.innerHTML='';
+      $('[data-ok]',dlg).onclick=()=>{const nm=$('[data-an]',dlg).value.trim()||st+'.rar';const f=$('[name=af14]:checked',dlg).value;if(loc==='win')return denied('WinRAR',nm);put(nm,srcOf(it),f);dlg.innerHTML=`<div class="dlg">✔ WinRAR 已建立 ${esc(nm)}</div>`;draw()};return}}
+  $('[data-paste]',box).onclick=()=>{if(!CLIP)return;if(loc==='win'){dlg.innerHTML='<div class="dlg">⚠ 目的資料夾存取被拒：需要系統管理員權限才能複製到此資料夾。</div>';return}put(CLIP.name,CLIP.src,'file');draw()};
   $$('[data-g]',box).forEach(b=>b.onclick=()=>{loc=b.dataset.g;selF=null;closeM();dlg.innerHTML='';draw()});
   $('[data-ctx]',box).onclick=e=>{e.stopPropagation();if(!selF){dlg.innerHTML='<div class="dlg">請先點選一個檔案</div>';return}openM({})};
+  $('[data-site]',box).onclick=openSite;
   box.addEventListener('click',e=>{if(menu&&!menu.contains(e.target)&&!e.target.closest('[data-ctx]'))closeM()});
-  draw();
-  checkBar(box,()=>{const ok=DESK.find(d=>d.src.toLowerCase()===S.zip.toLowerCase());const r=[[!!ok,ok?`桌面已有 ${esc(ok.name)}（內含 ${esc(zipBase)}）`:`尚未壓縮 ${esc(S.zip)}`]];
-    const wrong=DESK.filter(d=>d.src.toLowerCase()!==S.zip.toLowerCase());if(wrong.length)r.push([null,'另外壓縮了：'+wrong.map(d=>esc(baseOf(d.src))).join('、')]);return r},
-   ()=>`進入 ${esc(zipDir)} → <b>${esc(zipBase)}</b>（注意不是同名資料夾）右鍵 → 傳送到 → 壓縮的 (zipped) 資料夾 → 改放桌面「是」。`);
+  REFRESH.add(draw);draw();
+  checkBar(box,()=>{const arcs=DESK.filter(d=>d.kind!=='file').map(d=>({n:d.name,src:d.src,w:'桌面'})).concat(DL.filter(d=>['zip','rar'].includes(d.kind)).map(d=>({n:d.file,src:d.src,w:'下載'})));
+    const ok=arcs.find(a=>a.src.toLowerCase()===S.zip.toLowerCase());const r=[[!!ok,ok?`${ok.w}已有 ${esc(ok.n)}（內含 ${esc(zipBase)}）`:`尚未壓縮 ${esc(S.zip)}`]];
+    const wrong=arcs.filter(a=>a.src.toLowerCase()!==S.zip.toLowerCase());if(wrong.length)r.push([null,'另外壓縮了：'+wrong.map(a=>esc(baseOf(a.src))).join('、')]);return r},
+   ()=>`內建：${esc(zipDir)} → <b>${esc(zipBase)}</b>（不是同名資料夾）右鍵 → 傳送到 → 壓縮的 (zipped) 資料夾 →「是」放桌面。<br>WinRAR：下載並安裝 → 把 ${esc(zipBase)}「複製」到桌面「貼上」→ 右鍵「加到 "${esc(stem(zipBase))}.rar"」。`);
 },
 15(box){
   box.innerHTML=`<p class="simintro">模擬「記事本」編輯網頁並另存新檔，下方即時預覽。</p>
@@ -807,7 +1020,7 @@ function ftpSim(box,id){
   const showSt=()=>{$('[data-st]',box).textContent=FTP.changed?'已變更':'初始 passwd'+XX;$('[data-fs]',box).textContent=FTP.uploads.map(u=>u.name).join('、')||'（無）'};
   $('[data-rs]',box).onclick=()=>{FTP={pwd:'passwd'+XX,changed:false,uploads:[]};showSt()};
   const winFiles=()=>{const s=new Set(['win.ini','system.ini','twain_32.dll','notepad.exe','regedit.exe']);[S.transfer,S.zip].forEach(p=>{if(dirOf(p).toLowerCase()==='c:\\windows')s.add(baseOf(p))});return[...s]};
-  const LFS=()=>({'c:\\windows':winFiles(),'c:\\users\\student':['Desktop','Documents'],'c:\\users\\student\\desktop':DESK.map(d=>d.name),'c:\\':['Windows','Users','Program Files'],'d:\\':[]});
+  const LFS=()=>({'c:\\windows':winFiles(),'c:\\users\\student':['Desktop','Documents','Downloads'],'c:\\users\\student\\desktop':DESK.map(d=>d.name),'c:\\users\\student\\downloads':DL.map(d=>d.file),'c:\\':['Windows','Users','Program Files'],'d:\\':[]});
   const disp=p=>p.replace(/^([a-z]):/i,(m,d)=>d.toUpperCase()+':');
   const resolve=p=>{p=p.replace(/\//g,'\\').replace(/"/g,'');if(!/^[a-z]:/i.test(p))p=st.cwd.replace(/\\$/,'')+'\\'+p;p=p.replace(/\\+$/,'');if(/^[a-z]:$/i.test(p))p+='\\';return p};
   const prompt=()=>st.mode==='ftp'?'ftp> ':st.cwd+'>';
@@ -879,6 +1092,36 @@ ls
 bye</pre>`);
 }
 
+/* 考場下載網站（練習用模擬） */
+function SITE_FONTS(){const f=[{href:'DFFN_S5.TTC',label:'DFFT_S5.TTC',name:'華康行書體'},{href:'DFFN_L3.TTC',label:'DFFT_L3.TTC',name:'華康隸書體'},{href:'DFFN_B5.TTC',label:'DFFT_B5.TTC',name:'華康中黑體'}];
+  if(!f.some(x=>x.name===S.font))f.push({href:S.font+'.TTF',label:S.font+'.TTF',name:S.font});return f}
+const SITE_APPS={'leechftp.exe':['leechftp','LeechFTP'],'cuteftpzt.exe':['cuteftp','CuteFTP'],'putty.msi':['putty','PuTTY'],'cwinzip81.exe':['winzip','WinZip 8.1'],'winrar.exe':['winrar','WinRAR']};
+function openSite(){
+  const f=SITE_FONTS(),n=f.length,h=Math.ceil(n/2);
+  const cell=(href,label,extra)=>`<td align="center" class="sc" ${extra||''}><a href="#" data-dl="${esc(href)}">${label}</a></td>`;
+  const lab=t=>`<td align="center" class="sc lab"><b><mark>${t}</mark></b></td>`;
+  const wrap=document.createElement('div');wrap.className='brwwrap';
+  wrap.innerHTML=`<div class="brw"><div class="bt"><span class="tabt">電腦硬體裝修丙級檢定術科網站</span><button class="bx" data-x>✕ 關閉瀏覽器</button></div>
+  <div class="addr"><span>←</span><span>→</span><span>⟳</span><span class="url">http://192.168.240.200/</span></div>
+  <div class="pg"><p class="h1"><b>📝 即測即評</b></p><p class="h1">電腦硬體裝修(丙級)技能檢定術科測驗軟體下載網站</p>
+  <table class="st"><tr><td align="center" class="sc"><b class="th">軟體類型</b></td><td colspan="${n}" align="center" class="sc"><b class="th">軟體名稱</b></td></tr>
+  <tr>${lab('中 文 字 型')}${f.map(x=>cell(x.href,`${esc(x.label)}<br>${esc(x.name)}`)).join('')}</tr>
+  <tr>${lab('檔案傳輸軟體')}${cell('leechftp.exe','LeechFTP')}${cell('cuteftpzt.exe','CuteFTP')}${cell('putty.msi','Putty',n>3?`colspan="${n-2}"`:'')}</tr>
+  <tr>${lab('壓 縮 軟 體')}${cell('cwinzip81.exe','WinZIP',`colspan="${h}"`)}${cell('winrar.exe','WinRAR',`colspan="${n-h}"`)}</tr>
+  <tr><td colspan="${n+1}" class="sc note1">備註：直接按滑鼠左鍵點選，下載至磁碟機，<strong>請勿直接安裝</strong>。</td></tr></table>
+  <p class="foot">（練習用模擬頁面）</p></div>
+  <div class="acover" data-cv></div><div class="alertbox" data-al><div style="font-size:13px;color:#555">192.168.240.200 顯示</div><div style="margin:10px 0 16px">溫馨提醒：請直接點選滑鼠左鍵下載至磁碟機，請勿直接安裝</div><div style="text-align:right"><button class="btn pri" data-ok>確定</button></div></div>
+  <div class="dlb" data-b style="display:none"></div></div>`;
+  document.body.appendChild(wrap);
+  $('[data-ok]',wrap).onclick=()=>{$('[data-al]',wrap).remove();$('[data-cv]',wrap).remove()};
+  const close=()=>{wrap.remove();REFRESH.forEach(fn=>fn())};
+  $('[data-x]',wrap).onclick=close;wrap.addEventListener('click',e=>{if(e.target===wrap)close()});
+  let tm;
+  $$('[data-dl]',wrap).forEach(a=>a.onclick=e=>{e.preventDefault();const href=a.dataset.dl;
+    if(!DL.some(d=>d.file===href)){const ft=f.find(x=>x.href===href);if(ft)DL.push({file:href,kind:'font',font:ft.name});else{const ap=SITE_APPS[href];DL.push({file:href,kind:'app',app:ap[0],label:ap[1]})}}
+    const b=$('[data-b]',wrap);b.style.display='block';b.innerHTML=`⬇ <b>${esc(href)}</b><br>下載完成 — 已儲存到「下載」資料夾`;clearTimeout(tm);tm=setTimeout(()=>b.style.display='none',3000);REFRESH.forEach(fn=>fn())});
+}
+
 function renderNav(){
   $('#xx').textContent=XX;
   $('#nav').innerHTML=ITEMS.map(it=>`<li><button class="${it.id===cur?'on':''} ${passed[it.id]?'done':''}" data-id="${it.id}"><span class="n">${passed[it.id]?'✓':it.id}</span><span class="t">${it.t}</span><span class="os">${it.os==='win'?'Win':it.os==='lx'?'Linux':'Win+Linux'}</span></button></li>`).join('');
@@ -907,7 +1150,7 @@ $('#newxx').onclick=()=>{XX=rndXX();store.set('hw3_xx',XX);simCache={};resetShar
 $('#resetall').onclick=()=>{passed={};store.set('hw3_passed',passed);simCache={};resetShared();renderNav();renderMain()};
 
 const FIELDS=[['sysGB','1. 系統磁區 (GB)','number'],['dataGB','1. 資料磁區 (GB)','number'],['vmRAM','2. VM 記憶體 (GB)','number'],['winName','3. Windows 電腦名稱','text'],['linName','3. Linux 電腦名稱','text'],
-['winIP','4. Windows IP',['static','dhcp']],['linIP','4. Linux IP',['static','dhcp']],['ipPrefix','4. 固定 IP 前綴（後接 XX）','text'],['backupMin','5. 幾分鐘後啟動','number'],['backupFile','5. 備份檔案（hosts 或完整路徑）','text'],
+['winIP','4. Windows IP',['static','dhcp']],['linIP','4. Linux IP',['static','dhcp']],['ipPrefix','4. 固定 IP 前綴（後接 XX）','text'],['backupMin','5. 幾分鐘後啟動','number'],['backupFile','5. 備份檔案（hosts 或完整路徑）','text'],['backupDest','5. 備份目的資料夾','text'],
 ['u1','6. 使用者一帳號','text'],['p1','6. 使用者一密碼','text'],['u2','6. 使用者二帳號','text'],['p2','6. 使用者二密碼','text'],['printerMfr','7. 印表機製造商','text'],['printerModel','7. 印表機型號','text'],
 ['saverMin','8. 螢幕保護（分）','number'],['ime','9. 中文輸入法',['微軟注音','微軟倉頡','微軟速成']],['font','10. 中文字型','text'],['office','11. Office 軟體','office'],['ftpIP','12. FTP 主機 IP','text'],['ftpPwd','12. 新 FTP 密碼','text'],
 ['transfer','13. 傳輸檔案（完整路徑）','text'],['zip','14. 壓縮檔案（完整路徑）','text'],['color','15. 網頁字體顏色',['red','green','blue']]];
@@ -916,6 +1159,7 @@ function openSpec(src){$('#specform').innerHTML=FIELDS.map(([k,l,t])=>{
   if(Array.isArray(t))return `<label>${l}<select data-k="${k}">${t.map(o=>`<option value="${o}"${src[k]===o?' selected':''}>${{static:'固定式',dhcp:'動態式',red:'紅',green:'綠',blue:'藍'}[o]||o}</option>`).join('')}</select></label>`;
   return `<label>${l}<input type="${t}" data-k="${k}" value="${esc(src[k])}"></label>`}).join('');$('#modal').classList.add('show')}
 $('#editspec').onclick=()=>openSpec(S);
+$('#site').onclick=()=>openSite();
 $('#specdef').onclick=()=>openSpec(DEF);
 $('#speccancel').onclick=()=>$('#modal').classList.remove('show');
 $('#specsave').onclick=()=>{const n=Object.assign({},S);$$('#specform [data-k]').forEach(i=>{const t=FIELDS.find(f=>f[0]===i.dataset.k)[2];n[i.dataset.k]=t==='number'?(+i.value||0):i.value.trim()});
